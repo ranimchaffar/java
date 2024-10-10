@@ -1,18 +1,36 @@
 public class Zoo
 {
-    Animal[] animals;
-    String name;
-    String city;
-    final int NBR_CAGES=25 ;
-    static int nbranimals=0;
+    private Animal[] animals;
+    private String name;
+    private String city;
+    private final int NBR_CAGES = 25;
+    private static int nbranimals = 0;;
 
-    public Zoo(String name, String city, int NBR_CAGES)
-    {
-        this.name = name;
+    public Zoo(String name, String city, int NBR_CAGES) {
+        setName(name);  // Use setter for validation
         this.city = city;
-        //this.NBR_CAGES = NBR_CAGES;
         this.animals = new Animal[NBR_CAGES];
     }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name != null && !name.isEmpty()) {
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("Zoo name cannot be empty.");
+        }
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
 
     public void displayZoo()
     {
@@ -27,7 +45,7 @@ public class Zoo
     {
         for (int i = 0; i < nbranimals; i++)
         {
-            if(animals[i].name.equals(name))
+            if(animals[i].getName().equals(name))
             {
                 return i;
             }
@@ -35,21 +53,17 @@ public class Zoo
         return -1;
     }
 
-    public boolean addAnimal(Animal animal)
-    {if(this.searchAnimal(animal.name)==-1 && nbranimals < NBR_CAGES)
-     {
-         this.animals[nbranimals] = animal;
-
-         nbranimals++;
-
-         return true;
-     }
-     return false;
-
+    public boolean addAnimal(Animal animal) {
+        if (this.searchAnimal(animal.getName()) == -1 && !this.isZooFull()) {
+            this.animals[nbranimals] = animal;
+            nbranimals++;
+            return true;
+        }
+        return false;
     }
-    boolean removeAnimal(Animal animal)
-    {
-        int index = searchAnimal(animal.name);
+
+    public boolean removeAnimal(Animal animal) {
+        int index = searchAnimal(animal.getName());
         if (index != -1) {
             for (int i = index; i < nbranimals - 1; i++) {
                 animals[i] = animals[i + 1];
@@ -57,19 +71,21 @@ public class Zoo
             animals[nbranimals - 1] = null;
             nbranimals--;
             return true;
+        }
+        return false;
     }
-    return false;}
-    public boolean isZooFull()
-    {
+    public boolean isZooFull() {
         return nbranimals >= NBR_CAGES;
     }
-    Zoo comparerZoo(Zoo z1, Zoo z2)
-    {
-        if(z1.nbranimals==z2.nbranimals)
+
+    public Zoo comparerZoo(Zoo z1, Zoo z2) {
+        if (z1.nbranimals == z2.nbranimals) {
             return this;
-        else
+        } else {
             return z1.comparerZoo(z2, this);
+        }
     }
+
 
 
 
