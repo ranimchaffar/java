@@ -23,7 +23,7 @@ public class ZooManagement
 
 
         ///creation d un aanimal lion
-        */
+
 
 
 
@@ -62,6 +62,26 @@ public class ZooManagement
         ///affichage
 
         myzoo.displayZoo();
+        */
+        Aquatic aquatic = new Aquatic("Ocean");
+        Dolphin dolphin = new Dolphin("Ocean", 25.5f);
+        Penguin penguin = new Penguin("Antarctic", 10.0f);
+
+        // Affichage des objets créés
+        System.out.println(dolphin.toString());
+        System.out.println(penguin.toString());
+
+        // Appel des méthodes swim()
+        aquatic.swim();
+        dolphin.swim();
+        penguin.swim();
+
+        // Fermer le scanner
+        scanner.close();
+
+
+
+
 
 
 
