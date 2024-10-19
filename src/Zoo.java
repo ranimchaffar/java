@@ -1,16 +1,22 @@
-public class Zoo
-{
+public class Zoo {
     private Animal[] animals;
     private String name;
     private String city;
     private final int NBR_CAGES = 25;
-    private static int nbranimals = 0;;
+    private static int nbranimals = 0;
+    private Aquatic[] aquaticAnimals = new Aquatic[10];
+
+    public float maxPenguinSwimmingDepth() {
+        float maxDepth = 0.
+
 
     public Zoo(String name, String city, int NBR_CAGES) {
         setName(name);  // Use setter for validation
         this.city = city;
         this.animals = new Animal[NBR_CAGES];
+        this.aquaticAnimals = new Aquatic[10];
     }
+
     public String getName() {
         return name;
     }
@@ -28,25 +34,22 @@ public class Zoo
     }
 
     public void setCity(String city) {
-        this.city = city;
-    }
+        this.city=city;}
 
 
-    public void displayZoo()
-    {
+
+    public void displayZoo() {
         System.out.println(name + " " + city + " " + NBR_CAGES);
     }
-//    @Override
+
+    //    @Override
 //    public String toString()
 //    {
 //        return name + " " + city + " " + nbrCages;
 //    }
-    int searchAnimal(String name)
-    {
-        for (int i = 0; i < nbranimals; i++)
-        {
-            if(animals[i].getName().equals(name))
-            {
+    int searchAnimal(String name) {
+        for (int i = 0; i < nbranimals; i++) {
+            if (animals[i].getName().equals(name)) {
                 return i;
             }
         }
@@ -74,6 +77,7 @@ public class Zoo
         }
         return false;
     }
+
     public boolean isZooFull() {
         return nbranimals >= NBR_CAGES;
     }
@@ -87,10 +91,29 @@ public class Zoo
     }
 
 
+    public Animal[] getAnimals() {
+        return animals;
+    }
+
+    public void addAquaticAnimal(Aquatic aquatic) {
+        for (int i = 0; i < aquaticAnimals.length; i++) {
+            if (aquaticAnimals[i] == null) {
+                aquaticAnimals[i] = aquatic;
+                System.out.println("Added " + aquatic.getClass().getSimpleName() + " to the zoo.");
+                break;
+            }
+        }
+    }
+
+    // Méthode pour afficher la méthode `swim()` de chaque animal aquatique
+    public void displayAllSwim() {
+        for (Aquatic animal : aquaticAnimals) {
+            if (animal != null) {
+                animal.swim();
+            }
+        }
+    }
 
 
-  /*  void displayAnimal()
-    {
-        
-    }*/
+
 }

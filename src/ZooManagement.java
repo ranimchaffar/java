@@ -4,7 +4,7 @@ public class ZooManagement
 
     public static void main(String[] args)
     {
-        /*Scanner scanner= new Scanner(System.in);
+        Scanner scanner= new Scanner(System.in);
         System.out.print("Entrer zoo name");
         String zooName=scanner.nextLine();
         while(zooName.trim().isEmpty())
@@ -62,10 +62,10 @@ public class ZooManagement
         ///affichage
 
         myzoo.displayZoo();
-        */
-        Aquatic aquatic = new Aquatic("Ocean");
-        Dolphin dolphin = new Dolphin("Ocean", 25.5f);
-        Penguin penguin = new Penguin("Antarctic", 10.0f);
+
+        Aquatic aquatic = new Aquatic( "family",  "name",  15,  true,  "habitat");
+        Dolphin dolphin = new Dolphin( "family",  "name",  16,  false,  "habitat",25.5f);
+        Penguin penguin = new Penguin( "family",  "name",  26,  true,  "habitat",36.25f) ;
 
         // Affichage des objets créés
         System.out.println(dolphin.toString());
@@ -76,8 +76,15 @@ public class ZooManagement
         dolphin.swim();
         penguin.swim();
 
+
+        myzoo.addAquaticAnimal(dolphin);
+        myzoo.addAquaticAnimal(penguin);
+        myzoo.displayAllSwim();
+        ();
+
+
         // Fermer le scanner
-        scanner.close();
+
 
 
 

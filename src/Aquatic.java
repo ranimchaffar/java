@@ -9,6 +9,7 @@ public class Aquatic extends Animal {
     public Aquatic(String habitat) {
         this.habitat = habitat;
     }
+    public  Aquatic(){}
 
 
 

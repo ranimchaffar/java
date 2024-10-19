@@ -11,6 +11,7 @@ public class Animal {
         setAge(age);    // Use setter to validate age
         this.isMammal = isMammal;
     }
+   public  Animal(){}
 
     // Getters and setters with validation
     public String getFamily() {
