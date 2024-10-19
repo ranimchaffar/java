@@ -1,100 +1,60 @@
-import java.util.Scanner;
-public class ZooManagement
-{
+public class ZooManagement {
+    public static void main(String[] args) {
+        // Créer une instance du zoo
+        Zoo myZoo = new Zoo("Zoo de Paris", "Paris");
 
-    public static void main(String[] args)
-    {
-        Scanner scanner= new Scanner(System.in);
-        System.out.print("Entrer zoo name");
-        String zooName=scanner.nextLine();
-        while(zooName.trim().isEmpty())
-        {
-            System.out.print("le continu est vide !Reessayez a entrer le nom du zoo");
-         zooName=scanner.nextLine();
+        // Créer des instances d'animaux aquatiques
+        Dolphin dolphin = new Dolphin("Cetacea", "Flipper", 8, true, "Océan", 25.5f);
+        Penguin penguin1 = new Penguin("Bird", "Pingu", 5, false, "Arctique", 30.5f);
+        Penguin penguin2 = new Penguin("Bird", "Pinga", 7, false, "Arctique", 40.0f);
+
+        // Ajouter les animaux aquatiques au zoo
+        myZoo.addAquaticAnimal(dolphin);
+        myZoo.addAquaticAnimal(penguin1);
+        myZoo.addAquaticAnimal(penguin2);
+
+        // Afficher les animaux qui nagent
+        System.out.println("\nAffichage des comportements de nage :");
+        myZoo.displayAllSwim();
+
+        // Ajouter des animaux terrestres au zoo
+        Animal lion = new Animal("Felidae", "Simba", 5, false);
+        Animal giraffe = new Animal("Giraffidae", "Melman", 10, false);
+
+        myZoo.addAnimal(lion);
+        myZoo.addAnimal(giraffe);
+
+        // Afficher le zoo
+        System.out.println("\nInformations sur le zoo :");
+        myZoo.displayZoo();
+
+        // Rechercher un animal par son nom
+        String searchName = "Simba";
+        int animalIndex = myZoo.searchAnimal(searchName);
+        if (animalIndex != -1) {
+            System.out.println("\nL'animal " + searchName + " a été trouvé dans le zoo.");
+        } else {
+            System.out.println("\nL'animal " + searchName + " n'a pas été trouvé dans le zoo.");
         }
 
-        System.out.print("Entrer le nombre de cages ");
-        while(!scanner.hasNextInt()){
-            System.out.print("entrer le nombre de cages !");
-            scanner.next();
+        // Supprimer un animal
+        boolean removed = myZoo.removeAnimal(lion);
+        if (removed) {
+            System.out.println("\nL'animal " + lion.getName() + " a été supprimé du zoo.");
+        } else {
+            System.out.println("\nImpossible de supprimer l'animal " + lion.getName() + ".");
         }
-        int nbrCages = scanner.nextInt();
-        System.out.println(zooName + "comporte"+nbrCages+"cages");
 
+        // Comparer deux zoos (exemple de comparaison)
+        Zoo anotherZoo = new Zoo("Zoo de Lyon", "Lyon");
+        anotherZoo.addAnimal(new Animal("Panthera", "Bagheera", 6, false));
 
-        ///creation d un aanimal lion
+        System.out.println("\nComparaison entre deux zoos :");
+        Zoo biggerZoo = myZoo.comparerZoo(myZoo, anotherZoo);
+        System.out.println("Le zoo ayant le plus d'animaux est : " + biggerZoo.getName());
 
-
-
-
-
-
-        ///creationd un zoo
-
-        Zoo myzoo =new Zoo("belvidere","Tunis",10);
-        Zoo zazar =new Zoo("esprit","zarzis",4);
-
-        /// l ajout du lion
-        Animal lion =new Animal("chaffar","lion1",5,true);
-        System.out.println(myzoo.addAnimal(lion));
-        Animal lion9 =new Animal("chaffar","lion9",9,true);
-        System.out.println(myzoo.addAnimal(lion9));
-        Animal lion8 =new Animal("chaffar","lion8",8,true);
-        System.out.println(myzoo.addAnimal(lion8));
-        Animal lion7 =new Animal("chaffar","lion7",7,true);
-        System.out.println(myzoo.addAnimal(lion7));
-        Animal lion6 =new Animal("chaffar","lion6",6,true);
-        System.out.println(myzoo.addAnimal(lion6));
-        Animal lion5 =new Animal("chaffar","lion5",5,true);
-        System.out.println(myzoo.addAnimal(lion5));
-
-
-        Animal tigre = new Animal("tigra","baguira",5,true);
-        System.out.println(myzoo.addAnimal(tigre));
-
-        int index = myzoo.searchAnimal("Lion");
-        System.out.println(index != -1 ? "Lion trouvé à l'index : " + index : "Lion non trouvé.");
-
-        System.out.println(myzoo.removeAnimal(lion) ? "Lion supprimé." : "Lion non trouvé pour suppression.");
-        Animal ours = new Animal("Ours","dabdoub",5,true);
-        System.out.println(myzoo.addAnimal(ours));
-        System.out.println(myzoo.comparerZoo(zazar,myzoo));
-        ///affichage
-
-        myzoo.displayZoo();
-
-        Aquatic aquatic = new Aquatic( "family",  "name",  15,  true,  "habitat");
-        Dolphin dolphin = new Dolphin( "family",  "name",  16,  false,  "habitat",25.5f);
-        Penguin penguin = new Penguin( "family",  "name",  26,  true,  "habitat",36.25f) ;
-
-        // Affichage des objets créés
-        System.out.println(dolphin.toString());
-        System.out.println(penguin.toString());
-
-        // Appel des méthodes swim()
-        aquatic.swim();
-        dolphin.swim();
-        penguin.swim();
-
-
-        myzoo.addAquaticAnimal(dolphin);
-        myzoo.addAquaticAnimal(penguin);
-        myzoo.displayAllSwim();
-        ();
-
-
-        // Fermer le scanner
-
-
-
-
-
-
-
-
-
-
+        // Afficher la profondeur maximale de nage des pingouins
+        float maxDepth = myZoo.maxPenguinSwimmingDepth();
+        System.out.println("\nProfondeur maximale de nage des pingouins : " + maxDepth + " mètres");
     }
-
 }
-
