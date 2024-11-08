@@ -57,13 +57,30 @@ public class Zoo {
 
 
     // Ajouter un animal au zoo
-    public boolean addAnimal(Animal animal) {
-        if (this.searchAnimal(animal.getName()) == -1 && !this.isZooFull()) {
-            this.animals[nbranimals] = animal;
-            nbranimals++;
-            return true;
+    public void addAnimal(Animal animal) {
+        try
+        {if(animal.getAge() <0) {
+            throw new InvaidAgeException("Invalid age: " + animal.getAge());
         }
-        return false;
+        }
+        try{
+            if(isZooFull())
+
+            {throw new ZooFullException(" Zoo full");}
+            else
+            { if (searchAnimal(animal)== -1)
+                {animals[nbranimals] = animal;
+                nbranimals++;
+                System.out.println(" Hadha lhayawan tamma zawadanouhou animal.getName() = " + animal.getName());}
+                else {
+                System.out.println("hayawan mawjoud ");
+            }
+        }
+    }
+        catch(ZooFullException e) {
+            System.out.println(e.getMessage());
+
+        }
     }
 
 
@@ -140,5 +157,21 @@ public class Zoo {
     // Obtenir tous les animaux du zoo
     public Animal[] getAnimals() {
         return animals;
+    }
+
+    public void displayNumberOfAquaticsByType()
+    {
+        int dolphins = 0;
+        int penguins = 0;
+
+        for (Aquatic animal : aquaticAnimals) {
+            if (animal instanceof Dolphin) {
+                dolphins++;
+            } else if (animal instanceof Penguin) {
+                penguins++;
+            }
+        }
+
+        System.out.println("Il y a " + dolphins + " dolphins et " + penguins + " penguins.");
     }
 }
