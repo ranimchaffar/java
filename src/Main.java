@@ -1,31 +1,42 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        AffectationHashMap gestion = new AffectationHashMap();
+        // Création de la classe StudentManagement
+        StudentManagement management = new StudentManagement();
 
-        // Création d'employés
-        Employee e1 = new Employee(1, "Alice");
-        Employee e2 = new Employee(2, "Bob");
+        // Liste d'étudiants
+        List<Etudiant> students = new ArrayList<>();
+        students.add(new Etudiant(1, "Alice", 22));
+        students.add(new Etudiant(2, "Bob", 20));
+        students.add(new Etudiant(3, "Charlie", 23));
 
-        // Création de départements
-        Departement d1 = new Departement(1, "Informatique");
-        Departement d2 = new Departement(2, "RH");
+        // Afficher tous les étudiants
+        System.out.println("Liste des étudiants :");
+        management.displayStudents(students, System.out::println);
 
-        // Ajout d'affectations
-        gestion.ajouterEmployeDepartement(e1, d1);
-        gestion.ajouterEmployeDepartement(e2, d2);
+        // Afficher les étudiants ayant plus de 21 ans
+        System.out.println("\nÉtudiants ayant plus de 21 ans :");
+        management.displayStudentsByFilter(students, s -> s.getAge() > 21, System.out::println);
 
-        // Affichage des affectations
-        System.out.println("Affectations initiales :");
-        gestion.afficherEmployesEtDepartements();
+        // Retourner les noms des étudiants
+        System.out.println("\nNoms des étudiants :");
+        String names = management.returnStudentsNames(students, Etudiant::getNom);
+        System.out.println(names);
 
-        // Recherche d'un employé
-        System.out.println("Recherche employé Alice : " + gestion.rechercherEmploye(e1));
+        // Créer un nouvel étudiant
+        Etudiant newStudent = management.createStudent(() -> new Etudiant(4, "David", 19));
+        students.add(newStudent);
+        System.out.println("\nÉtudiant ajouté : " + newStudent);
 
-        // Suppression d'un employé
-        gestion.supprimerEmploye(e1);
+        // Trier les étudiants par ID
+        System.out.println("\nÉtudiants triés par ID :");
+        List<Etudiant> sortedStudents = management.sortStudentsById(students, Comparator.comparingInt(Etudiant::getId));
+        sortedStudents.forEach(System.out::println);
 
-        // Affichage après suppression
-        System.out.println("Après suppression d'Alice :");
-        gestion.afficherEmployesEtDepartements();
+        // Convertir en Stream
+        System.out.println("\nConversion en Stream et affichage :");
+        management.convertToStream(students).forEach(System.out::println);
     }
 }
