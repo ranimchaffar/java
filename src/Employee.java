@@ -1,10 +1,10 @@
 import java.util.Objects;
 
-public class Departement {
+public class Employee {
 	private int id;
 	private String nom;
 
-	public Departement(int id, String nom) {
+	public Employee(int id, String nom) {
 		this.id = id;
 		this.nom = nom;
 	}
@@ -21,17 +21,17 @@ public class Departement {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Departement that = (Departement) o;
-		return id == that.id && Objects.equals(nom, that.nom);
+		Employee employee = (Employee) o;
+		return id == employee.id;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, nom);
+		return Objects.hash(id);
 	}
 
 	@Override
 	public String toString() {
-		return "Departement{" + "id=" + id + ", nom='" + nom + '\'' + '}';
+		return "Employee{" + "id=" + id + ", nom='" + nom + '\'' + '}';
 	}
 }

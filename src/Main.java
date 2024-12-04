@@ -1,25 +1,31 @@
 public class Main {
-	public static void main(String[] args) {
-		DepartementHashSet gestionDepartements = new DepartementHashSet();
+    public static void main(String[] args) {
+        AffectationHashMap gestion = new AffectationHashMap();
 
-		Departement dep1 = new Departement(1, "Informatique", 50);
-		Departement dep2 = new Departement(2, "Marketing", 30);
-		Departement dep3 = new Departement(3, "RH", 20);
+        // Création d'employés
+        Employee e1 = new Employee(1, "Alice");
+        Employee e2 = new Employee(2, "Bob");
 
-		gestionDepartements.ajouterDepartement(dep1);
-		gestionDepartements.ajouterDepartement(dep2);
-		gestionDepartements.ajouterDepartement(dep3);
+        // Création de départements
+        Departement d1 = new Departement(1, "Informatique");
+        Departement d2 = new Departement(2, "RH");
 
-		System.out.println("Liste des départements:");
-		gestionDepartements.displayDepartement();
+        // Ajout d'affectations
+        gestion.ajouterEmployeDepartement(e1, d1);
+        gestion.ajouterEmployeDepartement(e2, d2);
 
-		System.out.println("\nRechercher 'Marketing': " + gestionDepartements.rechercherDepartement("Marketing"));
+        // Affichage des affectations
+        System.out.println("Affectations initiales :");
+        gestion.afficherEmployesEtDepartements();
 
-		System.out.println("\nSupprimer 'RH':");
-		gestionDepartements.supprimerDepartement(dep3);
-		gestionDepartements.displayDepartement();
+        // Recherche d'un employé
+        System.out.println("Recherche employé Alice : " + gestion.rechercherEmploye(e1));
 
-		System.out.println("\nDépartements triés par ID:");
-		gestionDepartements.trierDepartementById().forEach(System.out::println);
-	}
+        // Suppression d'un employé
+        gestion.supprimerEmploye(e1);
+
+        // Affichage après suppression
+        System.out.println("Après suppression d'Alice :");
+        gestion.afficherEmployesEtDepartements();
+    }
 }
