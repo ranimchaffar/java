@@ -1,31 +1,25 @@
-import java.util.Objects;
-
 public class Main {
 	public static void main(String[] args) {
-		SocieteArrayList societe = new SocieteArrayList();
+		DepartementHashSet gestionDepartements = new DepartementHashSet();
 
-		Employe e1 = new Employe(1, "Doe", "John", "IT", 5);
-		Employe e2 = new Employe(2, "Smith", "Anna", "HR", 4);
-		Employe e3 = new Employe(3, "Brown", "James", "Finance", 3);
+		Departement dep1 = new Departement(1, "Informatique", 50);
+		Departement dep2 = new Departement(2, "Marketing", 30);
+		Departement dep3 = new Departement(3, "RH", 20);
 
-		societe.ajouterEmploye(e1);
-		societe.ajouterEmploye(e2);
-		societe.ajouterEmploye(e3);
+		gestionDepartements.ajouterDepartement(dep1);
+		gestionDepartements.ajouterDepartement(dep2);
+		gestionDepartements.ajouterDepartement(dep3);
 
-		System.out.println("Liste des employés:");
-		societe.displayEmploye();
+		System.out.println("Liste des départements:");
+		gestionDepartements.displayDepartement();
 
-		System.out.println("\nRecherche employé par nom (Doe): " + societe.rechercherEmploye("Doe"));
+		System.out.println("\nRechercher 'Marketing': " + gestionDepartements.rechercherDepartement("Marketing"));
 
-		System.out.println("\nRecherche employé par instance: " + societe.rechercherEmploye(e1));
+		System.out.println("\nSupprimer 'RH':");
+		gestionDepartements.supprimerDepartement(dep3);
+		gestionDepartements.displayDepartement();
 
-		// Tri par ID
-		System.out.println("\nTri par ID:");
-		societe.trierEmployeParId();
-		societe.displayEmploye();
-
-		System.out.println("\nTri par Nom, Département et Grade:");
-		societe.trierEmployeParNomDépartementEtGrade();
-		societe.displayEmploye();
+		System.out.println("\nDépartements triés par ID:");
+		gestionDepartements.trierDepartementById().forEach(System.out::println);
 	}
 }
